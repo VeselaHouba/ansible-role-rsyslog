@@ -1,0 +1,5 @@
+---
+rsyslog_configs:
+  - name: some-remote-host
+    destination: some-remote-host.tld:514
+    disk_queue: true

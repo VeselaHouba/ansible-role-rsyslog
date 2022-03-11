@@ -1,0 +1,15 @@
+---
+- name: Install dependencies
+  apt:
+    name: rsyslog-gnutls
+
+- name: Deploy rsyslog configs
+  template:
+    src: etc/rsyslog.d/template.conf.j2
+    dest: "/etc/rsyslog.d/{{ config.name }}.conf"
+    mode: 0644
+  with_items: "{{ rsyslog_configs }}"
+  loop_control:
+    loop_var: config
+    label: "{{ config.name }}"
+  notify: restart rsyslog

@@ -1,0 +1,19 @@
+---
+rsyslog_configs: []
+# Examples
+# rsyslog_configs:
+#   - name: some-remote-host
+#     destination: some-remote-host:514
+#     disk_queue: true
+#
+#   - name: some-remote-host-tls
+#     destination: some-remote-host:6514
+#     disk_queue: true
+#     tls_enable: true
+#     tls_CAFile: /opt/ssl/certificates/ca.crt
+#     tls_CertFile: /opt/ssl/certificates/{{ ansible_fqdn }}.crt
+#     tls_KeyFile: /opt/ssl/certificates/{{ ansible_fqdn }}.key
+#     tls_AuthMode: x509/name
+#     tls_PermittedPeers:
+#       - peer1
+#       - peer2

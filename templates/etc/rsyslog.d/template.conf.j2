@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+{% if (config.disk_queue is defined) and config.disk_queue %}
+# Setup disk assisted queues
+$ActionQueueFileName fwdRule1     # unique name prefix for spool files
+$ActionQueueMaxDiskSpace 1g       # 1gb space limit (use as much as possible)
+$ActionQueueSaveOnShutdown on     # save messages to disk on shutdown
+$ActionQueueType LinkedList       # run asynchronously
+$ActionResumeRetryCount -1        # infinite retries if host is down
+{% endif %}
+
+{% if (config.tls_enable is defined) and config.tls_enable %}
+# tls
+$ActionSendStreamDriver gtls
+$ActionSendStreamDriverMode 1
+$DefaultNetstreamDriverCAFile {{ config.tls_CAFile }}
+$DefaultNetstreamDriverCertFile {{ config.tls_CertFile }}
+$DefaultNetstreamDriverKeyFile {{ config.tls_KeyFile }}
+
+$ActionSendStreamDriverAuthMode {{ config.tls_AuthMode }}
+{%  if config.tls_AuthMode == 'x509/name' %}
+{%    for peer in config.tls_PermittedPeers %}
+$ActionSendStreamDriverPermittedPeer {{ peer }}
+{%    endfor %}
+{%  endif %}
+{% endif %}
+
+*.* @@{{ config.destination }};config.ForwardFormat

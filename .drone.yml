@@ -1,0 +1,4 @@
+---
+kind: template
+load: drone-docker.star
+# Pipelines https://github.com/VeselaHouba/molecule/tree/master/dronelib
