@@ -1,4 +1,6 @@
 ---
+# Switch local syslog logging from legacy to ios8601
+rsyslog_local_iso8601: true
 rsyslog_configs: []
 # Examples
 # rsyslog_configs:

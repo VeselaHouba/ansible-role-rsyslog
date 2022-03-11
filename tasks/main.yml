@@ -3,6 +3,14 @@
   apt:
     name: rsyslog-gnutls
 
+- name: Change local logging format
+  replace:
+    dest: /etc/rsyslog.conf
+    regexp: '^\$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat'
+    replace: '# $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat'
+  when: rsyslog_local_iso8601
+  notify: restart rsyslog
+
 - name: Deploy rsyslog configs
   template:
     src: etc/rsyslog.d/template.conf.j2
