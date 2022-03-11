@@ -24,4 +24,20 @@ $ActionSendStreamDriverPermittedPeer {{ peer }}
 {%  endif %}
 {% endif %}
 
-*.* @@{{ config.destination }};RSYSLOG_ForwardFormat
+*.* @@{{ config.destinations[0] }};RSYSLOG_ForwardFormat
+{# First destination is primary, rest is failover #}
+{% if config.destinations|length > 1 %}
+$ActionExecOnlyWhenPreviousIsSuspended on
+{# for some strange reason, peers have to be defined again in this conditional action (bug?) #}
+{% if (config.tls_enable is defined) and config.tls_enable %}
+{%  if config.tls_AuthMode == 'x509/name' %}
+{%    for peer in config.tls_PermittedPeers %}
+$ActionSendStreamDriverPermittedPeer {{ peer }}
+{%    endfor %}
+{%  endif %}
+{% endif %}
+{%  for destination in config.destinations[1:] %}
+& @@{{ destination }};RSYSLOG_ForwardFormat
+{%  endfor %}
+$ActionExecOnlyWhenPreviousIsSuspended off
+{% endif %}

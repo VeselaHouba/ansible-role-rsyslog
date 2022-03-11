@@ -5,12 +5,15 @@ rsyslog_configs: []
 # Examples
 # rsyslog_configs:
 #   - name: some-remote-host
-#     destination: some-remote-host:514
+#     destinations:
+#       - some-remote-host:514
 #     disk_queue: true
 #
 #   - name: some-remote-host-tls
-#     destination: some-remote-host:6514
-#     disk_queue: true
+#     destinations:
+#       - some-remote-host:514
+#       - other-remote-host:514
+#     disk_queue: false # Disk queues don't play nicely with failover
 #     tls_enable: true
 #     tls_CAFile: /opt/ssl/certificates/ca.crt
 #     tls_CertFile: /opt/ssl/certificates/{{ ansible_fqdn }}.crt

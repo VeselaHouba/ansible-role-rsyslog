@@ -1,5 +1,10 @@
 ---
 rsyslog_configs:
   - name: some-remote-host
-    destination: some-remote-host.tld:514
+    destinations:
+      - some-remote-host.tld:514
     disk_queue: true
+  - name: mutli-remote-hosts
+    destinations:
+      - some-remote-host.tld:514
+      - other-remote-host.tld:514
