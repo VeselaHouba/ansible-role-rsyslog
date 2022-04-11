@@ -14,6 +14,7 @@ rsyslog_configs: []
 #       - some-remote-host:514
 #       - other-remote-host:514
 #     disk_queue: false # Disk queues don't play nicely with failover
+#     use_fqdn: true # Enabled by default
 #     tls_enable: true
 #     tls_CAFile: /opt/ssl/certificates/ca.crt
 #     tls_CertFile: /opt/ssl/certificates/{{ ansible_fqdn }}.crt

@@ -23,6 +23,9 @@ $ActionSendStreamDriverPermittedPeer {{ peer }}
 {%    endfor %}
 {%  endif %}
 {% endif %}
+{% if (config.use_fqdn is not defined) or ((config.use_fqdn is defined) and config.use_fqdn) %}
+$PreserveFQDN on
+{% endif %}
 
 *.* @@{{ config.destinations[0] }};RSYSLOG_ForwardFormat
 {# First destination is primary, rest is failover #}

@@ -8,3 +8,7 @@ rsyslog_configs:
     destinations:
       - some-remote-host.tld:514
       - other-remote-host.tld:514
+  - name: nofqdn
+    use_fqdn: false
+    destinations:
+      - some-remote-host.tld:514

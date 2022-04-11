@@ -19,3 +19,9 @@ def test_config_2(host):
     assert file.exists
     assert file.contains('ActionExecOnlyWhenPreviousIsSuspended')
     assert not file.contains('ActionQueueMaxDiskSpace')
+
+
+def test_config_nofqdn(host):
+    file = host.file("/etc/rsyslog.d/nofqdn.conf")
+    assert file.exists
+    assert not file.contains('$PreserveFQDN on')
