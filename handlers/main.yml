@@ -1,6 +1,6 @@
 ---
 - name: restart rsyslog
-  systemd:
+  service:
     name: rsyslog
     state: restarted
     no_block: true
